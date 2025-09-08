@@ -58,7 +58,7 @@ def webhook():
             send_message(chat_id, "👋 হাই! আমাকে ছবি পাঠান, আমি ব্যাকগ্রাউন্ড মুছে দিব।")
 
         elif text == "/share":
-            bot_username = os.environ.get("bgremovvbot")  # vercel env এ সেট করবেন
+            bot_username = os.environ.get(bgremovvbot)  # vercel env এ সেট করবেন
             if not bot_username:
                 send_message(chat_id, "⚠️ BOT_USERNAME সেট করা হয়নি।")
                 return "ok"

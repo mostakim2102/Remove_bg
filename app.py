@@ -9,6 +9,8 @@ REMOVE_BG_API_KEY = os.environ.get("REMOVE_BG_API_KEY")
 
 TELEGRAM_API = f"https://api.telegram.org/bot{TOKEN}"
 
+bot_username = "bgremovvbot"
+
 
 def send_message(chat_id, text):
     url = f"{TELEGRAM_API}/sendMessage"
@@ -58,7 +60,7 @@ def webhook():
             send_message(chat_id, "👋 হাই! আমাকে ছবি পাঠান, আমি ব্যাকগ্রাউন্ড মুছে দিব।")
 
         elif text == "/share":
-            bot_username = os.environ.get(bgremovvbot)  # vercel env এ সেট করবেন
+            bot_username = os.environ.get(" bot_username")  # vercel env এ সেট করবেন
             if not bot_username:
                 send_message(chat_id, "⚠️ BOT_USERNAME সেট করা হয়নি।")
                 return "ok"

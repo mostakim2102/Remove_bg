@@ -49,9 +49,39 @@ def webhook():
             requests.post(f"{TELEGRAM_API}/sendPhoto", data={"chat_id": chat_id}, files=files)
         else:
             send_message(chat_id, "❌ ব্যাকগ্রাউন্ড রিমুভ করতে সমস্যা হয়েছে।")
-    else:
-        if "text" in message and message["text"].lower() == "/start":
+
+    # যদি টেক্সট মেসেজ পাঠানো হয়
+    elif "text" in message:
+        text = message["text"].lower()
+
+        if text == "/start":
             send_message(chat_id, "👋 হাই! আমাকে ছবি পাঠান, আমি ব্যাকগ্রাউন্ড মুছে দিব।")
+
+        elif text == "/share":
+            bot_username = os.environ.get("BOT_USERNAME")  # vercel env এ সেট করবেন
+            if not bot_username:
+                send_message(chat_id, "⚠️ BOT_USERNAME সেট করা হয়নি।")
+                return "ok"
+
+            share_link = f"https://t.me/{bot_username}"
+            button = {
+                "inline_keyboard": [
+                    [
+                        {
+                            "text": "Share ♻️",
+                            "switch_inline_query": f"Check out this bot 👉 {share_link}",
+                        }
+                    ]
+                ]
+            }
+            url = f"{TELEGRAM_API}/sendMessage"
+            payload = {
+                "chat_id": chat_id,
+                "text": "📢 আপনার বন্ধুদের বটটি শেয়ার করুন 🎉",
+                "reply_markup": button,
+            }
+            requests.post(url, json=payload)
+
         else:
             send_message(chat_id, "📸 শুধু একটি ছবি পাঠান।")
 

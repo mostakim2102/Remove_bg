@@ -9,7 +9,8 @@ REMOVE_BG_API_KEY = os.environ.get("REMOVE_BG_API_KEY")
 
 TELEGRAM_API = f"https://api.telegram.org/bot{TOKEN}"
 
-BOT_USERNAME = "bgremovvbot"  # আপনার বটের ইউজারনেম সরাসরি এখানে সেট করা হয়েছে
+# সরাসরি বট ইউজারনেম বসানো হলো
+BOT_USERNAME = "bgremovvbot"
 
 
 def send_message(chat_id, text):
@@ -74,7 +75,7 @@ def webhook():
             url = f"{TELEGRAM_API}/sendMessage"
             payload = {
                 "chat_id": chat_id,
-                "text": "📢 আমার বট শেয়ার করুন 🎉",
+                "text": "📢 আপনার বন্ধুদের বটটি শেয়ার করুন 🎉",
                 "reply_markup": button,
             }
             requests.post(url, json=payload)

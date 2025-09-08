@@ -9,7 +9,7 @@ REMOVE_BG_API_KEY = os.environ.get("REMOVE_BG_API_KEY")
 
 TELEGRAM_API = f"https://api.telegram.org/bot{TOKEN}"
 
-bot_username = "bgremovvbot"
+BOT_USERNAME = "bgremovvbot"  # আপনার বটের ইউজারনেম সরাসরি এখানে সেট করা হয়েছে
 
 
 def send_message(chat_id, text):
@@ -60,12 +60,7 @@ def webhook():
             send_message(chat_id, "👋 হাই! আমাকে ছবি পাঠান, আমি ব্যাকগ্রাউন্ড মুছে দিব।")
 
         elif text == "/share":
-            bot_username = os.environ.get(" bot_username")  # vercel env এ সেট করবেন
-            if not bot_username:
-                send_message(chat_id, "⚠️ BOT_USERNAME সেট করা হয়নি।")
-                return "ok"
-
-            share_link = f"https://t.me/{bot_username}"
+            share_link = f"https://t.me/{BOT_USERNAME}"
             button = {
                 "inline_keyboard": [
                     [
@@ -79,7 +74,7 @@ def webhook():
             url = f"{TELEGRAM_API}/sendMessage"
             payload = {
                 "chat_id": chat_id,
-                "text": "📢 আপনার বন্ধুদের বটটি শেয়ার করুন 🎉",
+                "text": "📢 আমার বট শেয়ার করুন 🎉",
                 "reply_markup": button,
             }
             requests.post(url, json=payload)
